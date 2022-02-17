@@ -1,0 +1,10 @@
+---
+- name: Install venv
+  apt: name=python3-venv state=present
+  become: yes
+
+- name: Install pipx
+  command: python3 -m pip install --user pipx
+
+- name: Install tmuxp
+  command: python3 -m pipx install tmuxp

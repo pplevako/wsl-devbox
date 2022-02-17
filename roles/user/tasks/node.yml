@@ -1,0 +1,25 @@
+---
+- name: Install nvm
+  shell: >
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ nvm_version }}/install.sh | bash
+  args:
+    creates: '{{ user_home }}/.nvm/nvm.sh'
+
+- name: Install node
+  shell: >
+    . {{ user_home }}/.nvm/nvm.sh && nvm install {{ node_version }}
+  args:
+    creates: '{{ user_home }}/.nvm/versions/node/{{ node_version }}'
+    executable: /bin/bash
+
+- name: Set node {{ node_version }} as default
+  shell: >
+    . {{ user_home }}/.nvm/nvm.sh && nvm alias default {{ node_version }}
+  args:
+    executable: /bin/bash
+
+- name: Install yarn
+  shell: >
+    . {{ user_home }}/.nvm/nvm.sh && npm install --global yarn
+  args:
+    executable: /bin/bash

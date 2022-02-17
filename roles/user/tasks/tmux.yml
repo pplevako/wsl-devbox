@@ -1,0 +1,6 @@
+---
+- name: Copy .tmux.conf
+  copy:
+    src: .tmux.conf
+    dest: '{{ user_home }}/.tmux.conf'
+    backup: yes

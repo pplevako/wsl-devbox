@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: true
+  roles:
+    - { name: system, tags: system }
+
+- hosts: all
+  roles:
+    - user

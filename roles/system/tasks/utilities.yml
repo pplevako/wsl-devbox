@@ -1,0 +1,6 @@
+---
+- name: Install utilities
+  apt:
+    name:
+      - mc
+    update_cache: true

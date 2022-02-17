@@ -1,0 +1,7 @@
+---
+- name: Install postgresql client and libraries
+  apt:
+    name:
+      - postgresql-client
+      - libpq-dev
+    update_cache: true

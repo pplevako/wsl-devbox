@@ -1,0 +1,6 @@
+---
+- name: Set credential helper path
+  community.general.git_config:
+    name: credential.helper
+    scope: global
+    value: /mnt/c/Program\ Files/Git/mingw64/libexec/git-core/git-credential-manager-core.exe

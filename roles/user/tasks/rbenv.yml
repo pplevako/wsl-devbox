@@ -1,0 +1,47 @@
+---
+- name: Clone rbenv
+  git:
+    repo: https://github.com/rbenv/rbenv.git
+    dest: '{{ rbenv_root }}'
+
+- name: Add rbenv to $PATH
+  lineinfile:
+    path: '{{ user_home }}/.bashrc'
+    line: 'export PATH="$HOME/.rbenv/bin:$PATH"'
+
+- name: Set up rbenv init
+  lineinfile:
+    path: '{{ user_home }}/.bashrc'
+    line: 'eval "$(rbenv init - bash)"'
+
+- name: Install ruby-build
+  git:
+    repo: https://github.com/rbenv/ruby-build.git
+    dest: '{{ rbenv_root }}/plugins/ruby-build'
+
+- name: Install rbenv-default-gems
+  git:
+    repo: https://github.com/rbenv/rbenv-default-gems.git
+    dest: '{{ rbenv_root }}/plugins/rbenv-default-gems'
+
+- name: Add default gems
+  copy:
+    src: default-gems
+    dest: '{{ rbenv_root }}/default-gems'
+    backup: yes
+
+- name: Disable documentation generation on gem install
+  lineinfile:
+    path: '{{ user_home }}/.gemrc'
+    line: 'gem: --no-document'
+    create: yes
+
+- name: Install ruby {{ ruby_version }}
+  shell: >
+    {{ rbenv_root }}/bin/rbenv install {{ ruby_version }}
+  args:
+    creates: '{{ rbenv_root }}/versions/{{ ruby_version }}/bin/ruby'
+
+- name: Set ruby {{ ruby_version }} as global
+  shell: >
+    {{ rbenv_root }}/bin/rbenv global {{ ruby_version }}

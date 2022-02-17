@@ -1,0 +1,5 @@
+---
+- include_tasks: node.yml
+- include_tasks: rbenv.yml
+- include_tasks: tmux.yml
+- include_tasks: tmuxp.yml
