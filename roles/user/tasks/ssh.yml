@@ -10,8 +10,6 @@
   become: yes
 
 - name: Set up keychain init
-  blockinfile:
-    path: '{{ user_home }}/.bashrc'
-    marker: '# {mark} ANSIBLE MANAGED BLOCK keychain'
-    block: |
-      eval `keychain --eval --quiet id_rsa`
+  copy:
+    src: ssh/keychain.bashrc
+    dest: '{{ user_home }}/.bashrc.d/99-keychain.bashrc'

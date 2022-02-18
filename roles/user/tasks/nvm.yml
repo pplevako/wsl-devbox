@@ -1,9 +1,14 @@
 ---
 - name: Install nvm
   shell: >
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ nvm_version }}/install.sh | bash
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ nvm_version }}/install.sh | PROFILE=/dev/null bash
   args:
     creates: '{{ user_home }}/.nvm/nvm.sh'
+
+- name: Set up nvm init
+  copy:
+    src: nvm/nvm.bashrc
+    dest: '{{ user_home }}/.bashrc.d/99-nvm.bashrc'
 
 - name: Add default packages
   copy:
@@ -23,8 +28,3 @@
     . {{ user_home }}/.nvm/nvm.sh && nvm alias default {{ node_version }}
   args:
     executable: /bin/bash
-
-- name: Set up automatic version switch
-  copy:
-    src: nvm/nvm.bashrc
-    dest: '{{ user_home }}/.bashrc.d/99-nvm.bashrc'

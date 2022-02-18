@@ -4,15 +4,10 @@
     repo: https://github.com/rbenv/rbenv.git
     dest: '{{ rbenv_root }}'
 
-- name: Add rbenv to $PATH
-  lineinfile:
-    path: '{{ user_home }}/.bashrc'
-    line: 'export PATH="$HOME/.rbenv/bin:$PATH"'
-
 - name: Set up rbenv init
-  lineinfile:
-    path: '{{ user_home }}/.bashrc'
-    line: 'eval "$(rbenv init - bash)"'
+  copy:
+    src: rbenv/rbenv.bashrc
+    dest: '{{ user_home }}/.bashrc.d/99-rbenv.bashrc'
 
 - name: Install ruby-build
   git:
