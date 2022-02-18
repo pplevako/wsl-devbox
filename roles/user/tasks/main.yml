@@ -1,5 +1,13 @@
 ---
-- include_tasks: node.yml
+- include_tasks: bash.yml
+- include_tasks: nvm.yml
 - include_tasks: rbenv.yml
 - include_tasks: tmux.yml
 - include_tasks: tmuxp.yml
+- include_tasks: git.yml
+- include_tasks: ssh.yml
+
+- name: Create ~/projects directory
+  file:
+    path: '{{ user_home }}/projects'
+    state: directory

@@ -1,0 +1,17 @@
+---
+- name: Create ~/.ssh directory
+  file:
+    path: '{{ user_home }}/.ssh'
+    state: directory
+    mode: '0700'
+
+- name: Install keychain
+  apt: name=keychain state=present
+  become: yes
+
+- name: Set up keychain init
+  blockinfile:
+    path: '{{ user_home }}/.bashrc'
+    marker: '# {mark} ANSIBLE MANAGED BLOCK keychain'
+    block: |
+      eval `keychain --eval --quiet id_rsa`

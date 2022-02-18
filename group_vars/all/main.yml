@@ -5,5 +5,4 @@ user_home: '/home/{{ user }}'
 nvm_version: v0.39.1
 node_version: v17.4.0
 
-rbenv_root: '{{ user_home }}/.rbenv'
 ruby_version: 3.1.0

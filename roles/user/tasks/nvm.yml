@@ -5,6 +5,12 @@
   args:
     creates: '{{ user_home }}/.nvm/nvm.sh'
 
+- name: Add default packages
+  copy:
+    src: nvm/default-packages
+    dest: '{{ user_home }}/.nvm/default-packages'
+    backup: yes
+
 - name: Install node
   shell: >
     . {{ user_home }}/.nvm/nvm.sh && nvm install {{ node_version }}
@@ -18,8 +24,7 @@
   args:
     executable: /bin/bash
 
-- name: Install yarn
-  shell: >
-    . {{ user_home }}/.nvm/nvm.sh && npm install --global yarn
-  args:
-    executable: /bin/bash
+- name: Set up automatic version switch
+  copy:
+    src: nvm/nvm.bashrc
+    dest: '{{ user_home }}/.bashrc.d/99-nvm.bashrc'
