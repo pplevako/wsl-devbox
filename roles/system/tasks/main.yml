@@ -1,4 +1,5 @@
 ---
 - include_tasks: postgres.yml
 - include_tasks: redis.yml
+- include_tasks: dev_deps.yml
 - include_tasks: utilities.yml

@@ -1,0 +1,7 @@
+---
+- name: Install development dependencies
+  apt:
+    name:
+      - imagemagick
+      - libimage-exiftool-perl
+    update_cache: true
