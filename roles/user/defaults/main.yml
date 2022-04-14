@@ -1,2 +1,4 @@
 ---
 rbenv_root: '{{ user_home }}/.rbenv'
+
+fzf_version: 0.30.0
