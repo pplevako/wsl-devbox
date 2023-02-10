@@ -3,7 +3,20 @@
   file:
     path: '{{ user_home }}/.ssh'
     state: directory
-    mode: '0700'
+    mode: '700'
+
+- name: Create ~/.ssh/config.d directory
+  ansible.builtin.file:
+    path: '{{ user_home }}/.ssh/config.d'
+    state: directory
+
+- name: Include files from ~/.ssh/config.d
+  ansible.builtin.blockinfile:
+    path: '{{ user_home }}/.ssh/config'
+    marker: '# {mark} ANSIBLE MANAGED BLOCK config.d'
+    block: 'Include config.d/*'
+    create: true
+    mode: '644'
 
 - name: Install keychain
   apt: name=keychain state=present
