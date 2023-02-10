@@ -1,0 +1,12 @@
+---
+- name: Create ~/projects directory
+  ansible.builtin.file:
+    path: '{{ user_home }}/projects'
+    state: directory
+
+- name: Disable login message
+  ansible.builtin.file:
+    path: '{{ user_home }}/.hushlogin'
+    state: touch
+    modification_time: preserve
+    access_time: preserve

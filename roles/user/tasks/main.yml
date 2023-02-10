@@ -7,8 +7,4 @@
 - include_tasks: tmuxp.yml
 - include_tasks: git.yml
 - include_tasks: ssh.yml
-
-- name: Create ~/projects directory
-  file:
-    path: '{{ user_home }}/projects'
-    state: directory
+- include_tasks: misc.yml
