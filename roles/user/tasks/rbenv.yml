@@ -14,6 +14,13 @@
     repo: https://github.com/rbenv/ruby-build.git
     dest: '{{ rbenv_root }}/plugins/ruby-build'
 
+- name: Install ruby-build dependencies
+  ansible.builtin.apt:
+    name:
+      - libyaml-dev
+    update_cache: true
+  become: true
+
 - name: Install rbenv-default-gems
   git:
     repo: https://github.com/rbenv/rbenv-default-gems.git
@@ -30,6 +37,15 @@
     path: '{{ user_home }}/.gemrc'
     line: 'gem: --no-document'
     create: yes
+
+- name: Fetch latest ruby version
+  ansible.builtin.shell: >
+    {{ rbenv_root }}/bin/rbenv install -l | grep -v - | tail -1
+  register: ruby_version_output
+
+- name: Set ruby_version fact
+  ansible.builtin.set_fact:
+    ruby_version: '{{ ruby_version_output.stdout }}'
 
 - name: Install ruby {{ ruby_version }}
   shell: >
