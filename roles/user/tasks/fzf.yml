@@ -9,8 +9,6 @@
 - name: Generate .fzf.bash
   shell: >
     {{ user_home }}/.fzf/install --all --no-update-rc
-  args:
-    executable: /bin/bash
 
 - name: Set up fzf init
   command: mv {{ user_home }}/.fzf.bash {{ user_home }}/.bashrc.d/99-fzf.bashrc
