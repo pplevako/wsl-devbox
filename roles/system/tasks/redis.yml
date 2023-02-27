@@ -1,6 +1,5 @@
 ---
 - name: Install redis client
-  apt:
+  ansible.builtin.apt:
     name:
       - redis-tools
-    update_cache: true

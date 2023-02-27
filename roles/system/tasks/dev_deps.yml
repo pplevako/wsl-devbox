@@ -1,7 +1,6 @@
 ---
 - name: Install development dependencies
-  apt:
+  ansible.builtin.apt:
     name:
       - imagemagick
       - libimage-exiftool-perl
-    update_cache: true

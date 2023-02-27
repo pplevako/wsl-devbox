@@ -1,6 +1,11 @@
 ---
+- name: Install venv
+  ansible.builtin.apt:
+    name: python3-venv
+  become: true
+
 - name: Install pipx
-  command: python3 -m pip install --user pipx
+  ansible.builtin.command: python3 -m pip install --user pipx
 
 - name: Install tmuxp
-  command: python3 -m pipx install tmuxp
+  ansible.builtin.command: python3 -m pipx install tmuxp

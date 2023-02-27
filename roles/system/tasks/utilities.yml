@@ -1,6 +1,5 @@
 ---
 - name: Install utilities
-  apt:
+  ansible.builtin.apt:
     name:
       - mc
-    update_cache: true

@@ -18,7 +18,7 @@
   ansible.builtin.apt:
     name:
       - libyaml-dev
-    update_cache: true
+      - libssl-dev
   become: true
 
 - name: Install rbenv-default-gems
@@ -42,6 +42,7 @@
   ansible.builtin.shell: >
     {{ rbenv_root }}/bin/rbenv install -l | grep -v - | tail -1
   register: ruby_version_output
+  changed_when: false
 
 - name: Set ruby_version fact
   ansible.builtin.set_fact:
