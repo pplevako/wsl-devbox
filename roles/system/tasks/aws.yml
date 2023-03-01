@@ -1,0 +1,33 @@
+---
+- name: Create temporary directory
+  ansible.builtin.tempfile:
+    state: directory
+    suffix: awscliv2
+  register: tempdir
+
+- name: Download installation file
+  ansible.builtin.get_url:
+    url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+    dest: '{{ tempdir.path }}/awscliv2.zip'
+
+- name: Unzip the installer
+  ansible.builtin.unarchive:
+    src: '{{ tempdir.path }}/awscliv2.zip'
+    dest: '{{ tempdir.path }}'
+    remote_src: true
+
+- name: Install AWS CLI
+  ansible.builtin.shell: >
+    {{ tempdir.path }}/aws/install --update
+  become: true
+
+- name: Remove the temporary directory
+  ansible.builtin.file:
+    path: '{{ tempdir.path }}'
+    state: absent
+  when: tempdir.path is defined
+
+- name: Install Session Manager plugin
+  ansible.builtin.apt:
+    deb: https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb
+  become: true
