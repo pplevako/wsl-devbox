@@ -1,0 +1,5 @@
+---
+- name: Install GitKraken
+  ansible.builtin.apt:
+    deb: https://release.gitkraken.com/linux/gitkraken-amd64.deb
+  become: true

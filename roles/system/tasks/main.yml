@@ -17,3 +17,6 @@
 
 - ansible.builtin.import_tasks:
     file: aws.yml
+
+- ansible.builtin.import_tasks:
+    file: gitkraken.yml
