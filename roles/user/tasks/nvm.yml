@@ -16,14 +16,14 @@
     dest: '{{ user_home }}/.nvm/default-packages'
     backup: yes
 
-- name: Install node
+- name: Install node {{ node_version }}
   shell: >
-    . {{ user_home }}/.nvm/nvm.sh && nvm install {{ node_version }}
+    . {{ user_home }}/.nvm/nvm.sh && nvm install '{{ node_version }}'
   args:
     executable: /bin/bash
 
 - name: Set node {{ node_version }} as default
   shell: >
-    . {{ user_home }}/.nvm/nvm.sh && nvm alias default {{ node_version }}
+    . {{ user_home }}/.nvm/nvm.sh && nvm alias default '{{ node_version }}'
   args:
     executable: /bin/bash
