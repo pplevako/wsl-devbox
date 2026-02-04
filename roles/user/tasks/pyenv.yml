@@ -1,0 +1,31 @@
+---
+- name: Install pyenv
+  ansible.builtin.shell: >
+    curl -fsSL https://pyenv.run | bash
+  args:
+    creates: '{{ user_home }}/.pyenv/bin/pyenv'
+
+- name: Set up pyenv init
+  ansible.builtin.copy:
+    src: pyenv/pyenv.bashrc
+    dest: '{{ user_home }}/.bashrc.d/99-pyenv.bashrc'
+
+- name: Fetch latest python version
+  ansible.builtin.shell: >
+    {{ pyenv_root }}/bin/pyenv install -l | grep -v '[a-zA-Z]' | tail -1
+  register: python_version_output
+  changed_when: false
+
+- name: Set python_version fact
+  ansible.builtin.set_fact:
+    python_version: '{{ python_version_output.stdout | trim }}'
+
+- name: Install python {{ python_version }}
+  ansible.builtin.shell: >
+    {{ pyenv_root }}/bin/pyenv install {{ python_version }}
+  args:
+    creates: '{{ pyenv_root }}/versions/{{ python_version }}/bin/python'
+
+- name: Set python {{ python_version }} as global
+  ansible.builtin.shell: >
+    {{ pyenv_root }}/bin/pyenv global {{ python_version }}

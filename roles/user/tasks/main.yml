@@ -2,6 +2,7 @@
 - include_tasks: bash.yml
 - include_tasks: fzf.yml
 - include_tasks: nvm.yml
+- include_tasks: pyenv.yml
 - include_tasks: rbenv.yml
 - include_tasks: tmux.yml
 - include_tasks: tmuxp.yml
