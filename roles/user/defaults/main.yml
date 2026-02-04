@@ -4,4 +4,4 @@ pyenv_root: '{{ user_home }}/.pyenv'
 
 nvm_version: master
 node_version: lts/*
-fzf_version: 0.30.0
+fzf_version: master
