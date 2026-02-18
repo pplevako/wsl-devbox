@@ -26,6 +26,6 @@
   args:
     creates: '{{ pyenv_root }}/versions/{{ python_version }}/bin/python'
 
-- name: Set python {{ python_version }} as global
+- name: Set system python as global
   ansible.builtin.shell: >
-    {{ pyenv_root }}/bin/pyenv global {{ python_version }}
+    {{ pyenv_root }}/bin/pyenv global system
