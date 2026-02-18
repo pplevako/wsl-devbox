@@ -5,6 +5,7 @@
 - include_tasks: pyenv.yml
 - include_tasks: rbenv.yml
 - include_tasks: tmux.yml
+- include_tasks: pipx.yml
 - include_tasks: tmuxp.yml
 - include_tasks: git.yml
 - include_tasks: ssh.yml
